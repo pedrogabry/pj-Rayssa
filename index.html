@@ -1,16 +1,103 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rayssa</title>
-    <link rel="stylesheet" href="style.css">
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rayssa</title>
+        <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>        <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div>
+
+    <div class="container">
+        <h1>Me Desculpe</h1>
+        
         <audio controls>
             <source src="audio.ogg" type="audio/ogg">
-          </audio>
+            Seu navegador não suporta a tag de áudio.
+        </audio>
+            <button class="button" id="sendButton" data-valor="Rayssa respondeu: sim">Sim, eu vou te perduar</button>
+
     </div>
+    <script>
+        // Inicializa o EmailJS com o seu user ID
+        emailjs.init("_LqrJvH6AkJNS2elQ");
+
+        document.getElementById("sendButton").addEventListener("click", function() {
+            var valor = this.getAttribute("data-valor");
+
+            var templateParams = {
+                to_email: "pg100526@gmail.com",  // Substitua pelo seu e-mail
+                name: "Rayssa",
+                valor: valor
+            };
+
+            // Envia o valor usando o EmailJS
+            emailjs .send( "service_v745iw3" , "template_kgm3fel", templateParams )
+                .then(function(response) {
+                    alert("Valor enviado com sucesso!");
+                }, function(error) {
+                    alert("Erro ao enviar: " +  JSON.stringify(error));
+                });
+        });
+    </script>
+
 </body>
 </html>
